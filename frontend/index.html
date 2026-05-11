@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASL Recognition System</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app">
+    
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">🤟</div>
+      <h1>ASL Recognition System</h1>
+      <p class="subtitle">Real-time American Sign Language recognition and translation</p>
+    </header>
+
+    <!-- Main split-screen layout -->
+    <main class="main-container">
+      
+      <!-- LEFT PANEL: Camera Feed -->
+      <section class="left-panel">
+        <div class="panel-header">
+          <h2>Live Camera Feed</h2>
+          <div class="status-indicator" id="statusIndicator">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Camera Off</span>
+          </div>
+        </div>
+        
+        <div class="camera-container">
+          <div class="video-wrapper" id="videoWrapper">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            
+            <!-- Current gesture overlay -->
+            <div class="gesture-overlay" id="gestureOverlay" style="display: none;">
+              <span id="currentGesture">—</span>
+            </div>
+          </div>
+          
+          <!-- Camera controls -->
+          <div class="camera-controls">
+            <button class="btn btn-primary" id="startBtn">
+              <span class="btn-icon">▶</span>
+              Start Camera
+            </button>
+            <button class="btn btn-danger" id="stopBtn" disabled>
+              <span class="btn-icon">⏹</span>
+              Stop Camera
+            </button>
+            <button class="btn btn-secondary" id="clearBtn">
+              <span class="btn-icon">🗑</span>
+              Clear
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT PANEL: Recognition Results -->
+      <section class="right-panel">
+        
+        <!-- Section 1: Live Tokens -->
+        <div class="result-section">
+          <div class="section-header">
+            <h3>Live Tokens</h3>
+            <span class="token-counter" id="tokenCounter">0 tokens</span>
+          </div>
+          <div class="token-display" id="tokenDisplay">
+            <div class="token-placeholder">Tokens will appear here as you sign...</div>
+          </div>
+        </div>
+
+        <!-- Section 2: Recognized Letters -->
+        <div class="result-section">
+          <div class="section-header">
+            <h3>Recognized Letters</h3>
+            <button class="btn-icon" id="speakBtn" title="Read letters" style="display: none;">
+              🔊
+            </button>
+          </div>
+          <div class="sentence-display" id="sentenceDisplay">
+            <div class="sentence-placeholder">Recognized letters will appear after pause detection...</div>
+            <div class="sentence-text" id="sentenceText" style="display: none;"></div>
+          </div>
+          
+          <!-- Processing indicator -->
+          <div class="processing" id="processing" style="display: none;">
+            <div class="spinner"></div>
+            <span>Processing letters...</span>
+          </div>
+        </div>
+
+        <!-- Pause detection indicator -->
+        <div class="pause-indicator" id="pauseIndicator" style="display: none;">
+          <div class="pause-timer">
+            <div class="pause-bar" id="pauseBar"></div>
+          </div>
+          <span class="pause-text">Pause detected - showing letters...</span>
+        </div>
+
+        <!-- Error display -->
+        <div class="error-display" id="errorDisplay" style="display: none;"></div>
+
+      </section>
+    </main>
+
+    <!-- Manual input section (for testing) -->
+    <section class="manual-section">
+      <details>
+        <summary>Manual Token Input (Testing)</summary>
+        <div class="manual-controls">
+          <input type="text" id="manualInput" placeholder="Enter tokens: I LOVE YOU" />
+          <button class="btn btn-primary" id="manualBtn">Interpret</button>
+        </div>
+      </details>
+    </section>
+
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
